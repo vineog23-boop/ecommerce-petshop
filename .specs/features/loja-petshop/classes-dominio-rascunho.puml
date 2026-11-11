@@ -1,0 +1,66 @@
+@startuml
+!pragma layout smetana
+title Loja do pet shop — conceitos do domínio (rascunho)
+
+class Categoria {
+  nome
+}
+
+class Produto {
+  nome
+  descricao
+  preco
+}
+
+class Carrinho {
+  totalDosProdutos()
+}
+
+class ItemCarrinho {
+  quantidade
+  subtotal()
+}
+
+class Cliente {
+  nome
+  email
+  telefone
+}
+
+class Pedido {
+  modalidade
+  status
+  totalDosProdutos
+}
+
+class ItemPedido {
+  nomeDoProduto
+  quantidade
+  precoUnitario
+}
+
+Categoria "1" -- "0..*" Produto : agrupa
+Carrinho "1" *-- "0..*" ItemCarrinho : contém
+ItemCarrinho "0..*" --> "1" Produto : refere-se a
+Cliente "1" -- "0..*" Pedido : faz
+Pedido "1" *-- "1..*" ItemPedido : registra
+ItemPedido "0..*" --> "1" Produto : origem no catálogo
+
+note bottom of Categoria
+  Um produto em uma categoria é hipótese
+  inicial para simplificar o catálogo.
+  Confirmar com os produtos reais.
+end note
+
+note bottom of Carrinho
+  Seleção que o cliente pode alterar
+  antes de registrar o pedido.
+end note
+
+note bottom of Pedido
+  Estados: Enviado, Aceito e Pronto.
+  O proprietário altera os dois últimos.
+  Guarda os dados dos itens no fechamento.
+  Ainda não define tabelas ou classes Java.
+end note
+@enduml

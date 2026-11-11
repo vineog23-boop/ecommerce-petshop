@@ -1,0 +1,26 @@
+# Build & dependências
+/target/
+/node_modules/
+/*.log
+npm-debug.log*
+
+# Sistema operacional e IDEs
+.DS_Store
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Variáveis de ambiente
+.env
+.env.*
+!*.example
+
+# Ferramentas locais e sessões de IA
+/graphify-out/
+/.aprender/
+/.agents/
+/.claude/
+/.gemini/

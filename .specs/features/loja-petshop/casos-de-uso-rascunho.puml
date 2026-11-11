@@ -1,0 +1,48 @@
+@startuml
+!pragma layout smetana
+title Loja do pet shop — objetivos dos usuários
+left to right direction
+
+actor Cliente
+actor "Proprietário" as Proprietario
+
+rectangle "Site do pet shop" {
+  usecase "Explorar a vitrine" as Inicio
+  usecase "Explorar produtos\npor categoria" as Consultar
+  usecase "Ver detalhes\ndo produto" as Detalhes
+  usecase "Gerenciar carrinho" as Montar
+  usecase "Cadastrar conta" as Cadastrar
+  usecase "Entrar na conta\ncom código por e-mail" as Entrar
+  usecase "Finalizar pedido" as Registrar
+  usecase "Consultar pedidos\ne histórico de clientes" as ConsultarPedidos
+  usecase "Aceitar pedido" as Aceitar
+  usecase "Marcar pedido\ncomo pronto" as Pronto
+  usecase "Manter catálogo" as Atualizar
+}
+
+Cliente --> Inicio
+Cliente --> Consultar
+Cliente --> Detalhes
+Cliente --> Montar
+Cliente --> Cadastrar
+Cliente --> Entrar
+Cliente --> Registrar
+Proprietario --> ConsultarPedidos
+Proprietario --> Aceitar
+Proprietario --> Pronto
+Proprietario --> Atualizar
+
+note right of Registrar
+  O login é exigido na finalização.
+  O pedido entra como Enviado;
+  o proprietário o vê no sistema.
+  A conta da loja confirma o recebimento
+  pelo WhatsApp do cliente.
+end note
+
+note right of Aceitar
+  Cada mudança para Aceito ou Pronto
+  gera uma atualização automática
+  no WhatsApp do cliente.
+end note
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+!pragma layout smetana
+title Do catálogo ao pedido pronto — fluxo principal
+
+|Cliente|
+start
+:Acessar a vitrine e explorar produtos;
+:Explorar categorias;
+repeat
+  :Abrir produto e consultar descrição e preço;
+  :Adicionar produto e quantidade ao carrinho;
+repeat while (Escolher outro produto?) is (sim)
+|Site|
+:Atualizar carrinho e calcular total dos produtos;
+|Cliente|
+:Revisar itens, preços e total no carrinho;
+:Solicitar finalização;
+if (Está autenticado?) then (não)
+  :Criar conta ou entrar com código por e-mail;
+endif
+:Escolher retirada ou entrega;
+:Confirmar pedido;
+|Site|
+:Registrar pedido como Enviado, vinculado ao cliente;
+:Solicitar à conta da loja confirmação\nautomática pelo WhatsApp do cliente;
+|Proprietário|
+:Consultar pedido na área restrita;
+:Combinar frete pelo WhatsApp, se for entrega;
+:Aceitar pedido;
+|Site|
+:Alterar estado para Aceito;
+:Solicitar atualização automática\nno WhatsApp do cliente;
+|Proprietário|
+:Marcar pedido como Pronto;
+|Site|
+:Alterar estado para Pronto;
+:Solicitar atualização automática\nno WhatsApp do cliente;
+note right
+  O pedido permanece registrado
+  mesmo se uma notificação falhar.
+end note
+stop
+@enduml
